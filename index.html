@@ -7,6 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2154321832628954');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2154321832628954&ev=PageView&noscript=1"></noscript>
+<!-- End Meta Pixel -->
 <style>
   :root{
     --cream:#F5ECDF;
@@ -711,6 +719,7 @@ function handleOrder(e){
   })
   .then(function(res){
     if (!res.ok) throw new Error('Telegram error');
+    try { if (window.fbq) fbq('track', 'Purchase', { value: total, currency: 'UAH', num_items: parseInt(qty) || 1 }); } catch (err) {}
     document.getElementById('formOk').textContent = 'Дякуємо! Заявку на ' + qty + ' шт. (' + total + ' ₴) прийнято.' + (savings > 0 ? (' Ви заощадили ' + savings + ' ₴.') : '') + ' Ми зателефонуємо, щоб підтвердити замовлення і дані доставки.';
     document.getElementById('formOk').style.color = '#E7A63D';
     document.getElementById('formOk').style.display = 'block';
